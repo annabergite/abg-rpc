@@ -3,15 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>abg-rpc</artifactId>
+	<artifactId>abg-cloud</artifactId>
 	<version>${version.abg}</version>
 	<packaging>jar</packaging>
 
-	<name>abg-rpc</name>
+	<name>abg-cloud</name>
 	<description>abg rpc</description>
 
 	<parent>
-		<groupId>com.abg-rpc</groupId>
+		<groupId>com.abg-cloud</groupId>
 		<artifactId>abg-all</artifactId>
 		<version>0.0.9</version>
 	</parent>
@@ -25,9 +25,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/annabergite/abg-rpc/abg-rpc</url>
-		<connection>https://github.com/annabergite/abg-rpc.git</connection>
-		<developerConnection>https://github.com/annabergite/abg-rpc/issues</developerConnection>
+		<url>https://github.com/annabergite/abg-cloud/abg-cloud</url>
+		<connection>https://github.com/annabergite/abg-cloud.git</connection>
+		<developerConnection>https://github.com/annabergite/abg-cloud/issues</developerConnection>
 	</scm>
 
 	<developers>
@@ -41,12 +41,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
+			<groupId>com.abg-cloud</groupId>
 			<artifactId>abg-jcl</artifactId>
 			<version>${version.abg}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
+			<groupId>com.abg-cloud</groupId>
 			<artifactId>abg-utils</artifactId>
 			<version>${version.abg}</version>
 		</dependency>

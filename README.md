@@ -1,6 +1,6 @@
-# abg-rpc
+# abg-cloud
 
-**abg-rpc 是一款速度超凡的异步响应式RPC框架**
+**abg-cloud 是一款速度超凡的异步响应式RPC框架**
 ## 功能特点
  - 仅支持异步调用, Service 接口所有 public 方法返回值都必须为 CompletableFuture
  - 配置定义在 Service 接口上, 而非实现类上, 方法实现者和调用者都不需要引入奇奇怪怪的注解
@@ -16,35 +16,35 @@ Maven依赖:
 ```xml
 <!-- 必须引入 -->
 <dependency>
-    <groupId>com.abg-rpc</groupId>
-    <artifactId>abg-rpc</artifactId>
+    <groupId>com.abg-cloud</groupId>
+    <artifactId>abg-cloud</artifactId>
     <version>0.0.9</version>
 </dependency>
 
 <!-- 序列化方式，kryo protostuff 两个中任选一个 -->
 <dependency>
-    <groupId>com.abg-rpc</groupId>
+    <groupId>com.abg-cloud</groupId>
     <artifactId>abg-kryo</artifactId>
     <version>0.0.9</version>
 </dependency>
 
 <!-- 序列化方式，kryo protostuff 两个中任选一个 -->
 <dependency>
-    <groupId>com.abg-rpc</groupId>
+    <groupId>com.abg-cloud</groupId>
     <artifactId>abg-protostuff</artifactId>
     <version>0.0.9</version>
 </dependency>
 
 <!-- zk注册中心，可选引入 -->
 <dependency>
-    <groupId>com.abg-rpc</groupId>
+    <groupId>com.abg-cloud</groupId>
     <artifactId>abg-register-zk</artifactId>
     <version>0.0.9</version>
 </dependency>
 
 <!-- SpringBoot集成，可选引入 -->
 <dependency>
-    <groupId>com.abg-rpc</groupId>
+    <groupId>com.abg-cloud</groupId>
     <artifactId>abg-spring-boot-starter</artifactId>
     <version>0.0.9</version>
 </dependency>

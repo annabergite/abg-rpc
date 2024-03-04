@@ -11,7 +11,7 @@
 	<description>abg utils</description>
 
 	<parent>
-		<groupId>com.abg-rpc</groupId>
+		<groupId>com.abg-cloud</groupId>
 		<artifactId>abg-all</artifactId>
 		<version>0.0.9</version>
 	</parent>

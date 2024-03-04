@@ -11,7 +11,7 @@
 	<description>common logging</description>
 
 	<parent>
-		<groupId>com.abg-rpc</groupId>
+		<groupId>com.abg-cloud</groupId>
 		<artifactId>abg-all</artifactId>
 		<version>0.0.9</version>
 	</parent>
@@ -25,9 +25,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/annabergite/abg-rpc/abg-jcl</url>
-		<connection>https://github.com/annabergite/abg-rpc.git</connection>
-		<developerConnection>https://github.com/annabergite/abg-rpc/issues</developerConnection>
+		<url>https://github.com/annabergite/abg-cloud/abg-jcl</url>
+		<connection>https://github.com/annabergite/abg-cloud.git</connection>
+		<developerConnection>https://github.com/annabergite/abg-cloud/issues</developerConnection>
 	</scm>
 
 	<developers>

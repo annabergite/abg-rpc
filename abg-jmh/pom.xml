@@ -11,7 +11,7 @@
 	<url>http://maven.apache.org</url>
 
 	<parent>
-		<groupId>com.abg-rpc</groupId>
+		<groupId>com.abg-cloud</groupId>
 		<artifactId>abg-all</artifactId>
 		<version>0.0.9</version>
 	</parent>
@@ -41,17 +41,17 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
+			<groupId>com.abg-cloud</groupId>
 			<artifactId>abg-protostuff</artifactId>
 			<version>${version.abg}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
+			<groupId>com.abg-cloud</groupId>
 			<artifactId>abg-kryo</artifactId>
 			<version>${version.abg}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
+			<groupId>com.abg-cloud</groupId>
 			<artifactId>abg-spring-boot-starter</artifactId>
 			<version>${version.abg}</version>
 		</dependency>
@@ -66,8 +66,8 @@
 			<version>${version.jctools}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.abg-rpc</groupId>
-			<artifactId>abg-rpc</artifactId>
+			<groupId>com.abg-cloud</groupId>
+			<artifactId>abg-cloud</artifactId>
 			<version>${version.abg}</version>
 		</dependency>
 		<dependency>

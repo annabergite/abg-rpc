@@ -3,17 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.abg-rpc</groupId>
+	<groupId>com.abg-cloud</groupId>
 	<artifactId>abg-all</artifactId>
 	<version>0.0.9</version>
 	<packaging>pom</packaging>
 	<name>abg-all</name>
-	<description>abg-cloud is a super fast reactive rpc framework</description>
 
 	<modules>
 		<module>abg-jcl</module>
 		<module>abg-utils</module>
-		<module>abg-rpc</module>
+		<module>abg-cloud</module>
 		<module>abg-kryo</module>
 		<module>abg-protostuff</module>
 		<module>abg-register-zk</module>
@@ -158,9 +157,9 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/annabergite/abg-rpc/abg-jcl</url>
-		<connection>https://github.com/annabergite/abg-rpc.git</connection>
-		<developerConnection>https://github.com/annabergite/abg-rpc/issues</developerConnection>
+		<url>https://github.com/annabergite/abg-cloud/abg-jcl</url>
+		<connection>https://github.com/annabergite/abg-cloud.git</connection>
+		<developerConnection>https://github.com/annabergite/abg-cloud/issues</developerConnection>
 	</scm>
 
 	<developers>
