@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import com.google.common.base.Strings;
 import com.google.common.collect.Streams;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.common.abgConnectService;
 import rpc.abg.server.abgConnectServiceServerImpl;
 import rpc.abg.util.FastMap;
@@ -67,7 +67,7 @@ public class ServerInvokerFactory {
 	}
 
 	public ServerInvokerFactory() {
-		this(abgService.DEFAULT_GROUP, abgService.DEFAULT_APP);
+		this(AbgService.DEFAULT_GROUP, AbgService.DEFAULT_APP);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class ServerInvokerFactory {
 			throw new InvokeException("the clazz must be public");
 		}
 
-		abgService classConfig = clazz.getAnnotation(abgService.class);
+		AbgService classConfig = clazz.getAnnotation(AbgService.class);
 		if (classConfig != null && classConfig.ignore()) {
 			if (logger.isInfoEnabled()) {
 				logger.info(clazz + " ignore");
@@ -235,7 +235,7 @@ public class ServerInvokerFactory {
 					}
 				})//
 				.filter(m -> {
-					abgService methodConfig = m.getAnnotation(abgService.class);
+					AbgService methodConfig = m.getAnnotation(AbgService.class);
 
 					if (methodConfig != null && methodConfig.ignore()) {
 						if (logger.isInfoEnabled()) {

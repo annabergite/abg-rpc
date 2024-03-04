@@ -20,7 +20,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 import rpc.abg.annotation.abgFailover;
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.config.server.ServerConfig;
 import rpc.abg.invoke.ServerInvokerFactory;
 import rpc.abg.server.abgServer;
@@ -28,7 +28,7 @@ import rpc.abg.util.tuple.Tuple2;
 import rpc.abg.util.tuple.Tuple3;
 
 @Configuration
-@ConditionalOnClass({ abgService.class, EnableabgServer.class })
+@ConditionalOnClass({ AbgService.class, EnableabgServer.class })
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class abgServerStarter {
 	private static final Log logger = LogFactory.getLog(abgServerStarter.class);
@@ -74,18 +74,18 @@ public class abgServerStarter {
 		}
 
 		@SuppressWarnings("rawtypes")
-		Collection<Tuple3<abgService, Class, Object>> abgServiceList = getabgServiceList();
+		Collection<Tuple3<AbgService, Class, Object>> AbgServiceList = getAbgServiceList();
 
-		if (abgServiceList.isEmpty()) {
+		if (AbgServiceList.isEmpty()) {
 			if (logger.isErrorEnabled()) {
-				logger.error("找不到有效的 abgService，无法开启abgServer!");
+				logger.error("找不到有效的 AbgService，无法开启abgServer!");
 			}
 
 			return;
 		}
 
 		ServerInvokerFactory invokerFactory = new ServerInvokerFactory(serverConfig.getGroup(), serverConfig.getApp());
-		abgServiceList.forEach(t3 -> {
+		AbgServiceList.forEach(t3 -> {
 			invokerFactory.register(t3._2, t3._3);
 		});
 
@@ -105,26 +105,26 @@ public class abgServerStarter {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private Collection<Tuple3<abgService, Class, Object>> getabgServiceList() {
+	private Collection<Tuple3<AbgService, Class, Object>> getAbgServiceList() {
 		Map<String, Object> beans = applicationContext.getBeansOfType(Object.class);
 
 		if (beans == null || beans.isEmpty()) {
 			return List.of();
 		}
 
-		Map<Class, Tuple3<abgService, Class, Object>> abgServiceMap = beans//
+		Map<Class, Tuple3<AbgService, Class, Object>> AbgServiceMap = beans//
 				.entrySet()//
 				.parallelStream()//
 				.map(kv -> {
 					Object bean = kv.getValue();
-					Tuple2<abgService, Class> t2 = getabgService(bean);
+					Tuple2<AbgService, Class> t2 = getAbgService(bean);
 
 					if (t2 == null) {
 						return null;
 					}
 
 					if (logger.isDebugEnabled()) {
-						logger.debug("find abgService: " + kv.getKey() + " " + t2._2.getName() + t2._1);
+						logger.debug("find AbgService: " + kv.getKey() + " " + t2._2.getName() + t2._1);
 					}
 
 					return tuple(t2._1, t2._2, bean);
@@ -133,15 +133,15 @@ public class abgServerStarter {
 				.collect(Collectors.toConcurrentMap(//
 						t3 -> t3._2, //
 						t3 -> t3, //
-						(Tuple3<abgService, Class, Object> v1, Tuple3<abgService, Class, Object> v2) -> {
+						(Tuple3<AbgService, Class, Object> v1, Tuple3<AbgService, Class, Object> v2) -> {
 							if (logger.isWarnEnabled()) {
-								abgService abgService = v1._1;
-								Class abgServiceClass = v1._2;
+								AbgService AbgService = v1._1;
+								Class AbgServiceClass = v1._2;
 
 								Class implClass1 = v1._3.getClass();
 								Class implClass2 = v2._3.getClass();
 
-								logger.warn("存在冲突 abgService: " + abgServiceClass.getName() + abgService //
+								logger.warn("存在冲突 AbgService: " + AbgServiceClass.getName() + AbgService //
 										+ ", 生效: " + implClass1.getName() //
 										+ ", 忽略: " + implClass2.getName());
 							}
@@ -149,11 +149,11 @@ public class abgServerStarter {
 							return v1;
 						}));
 
-		return abgServiceMap.values();
+		return AbgServiceMap.values();
 	}
 
 	@SuppressWarnings("rawtypes")
-	private Tuple2<abgService, Class> getabgService(Object bean) {
+	private Tuple2<AbgService, Class> getAbgService(Object bean) {
 		if (bean == null) {
 			return null;
 		}
@@ -172,9 +172,9 @@ public class abgServerStarter {
 		for (int i = 0; i < interfaces.length; i++) {
 			Class<?> interfaceClass = interfaces[i];
 
-			abgService abgService = interfaceClass.getAnnotation(abgService.class);
-			if (abgService != null) {
-				return tuple(abgService, interfaceClass);
+			AbgService AbgService = interfaceClass.getAnnotation(AbgService.class);
+			if (AbgService != null) {
+				return tuple(AbgService, interfaceClass);
 			}
 		}
 

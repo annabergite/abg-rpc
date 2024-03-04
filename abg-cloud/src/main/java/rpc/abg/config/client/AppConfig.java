@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import com.typesafe.config.Config;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.config.ConfigException;
 import rpc.abg.config.HostPort;
 import rpc.abg.discover.DirectConnectDiscover;
@@ -20,8 +20,8 @@ import rpc.abg.loadbalance.Weightable;
 
 public class AppConfig {
 
-	private String group = abgService.DEFAULT_GROUP;
-	private String app = abgService.DEFAULT_APP;
+	private String group = AbgService.DEFAULT_GROUP;
+	private String app = AbgService.DEFAULT_APP;
 	private String serializer = "rpc.abg.serialization.protostuff.ProtostuffSerializer";
 	private int globalTimeout = 0;
 	private int maxRequestWait = 0;
@@ -150,8 +150,8 @@ public class AppConfig {
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException {
 
-		String group = getStringOrElse(config, "group", abgService.DEFAULT_GROUP);
-		String app = getStringOrElse(config, "app", abgService.DEFAULT_GROUP);
+		String group = getStringOrElse(config, "group", AbgService.DEFAULT_GROUP);
+		String app = getStringOrElse(config, "app", AbgService.DEFAULT_GROUP);
 		int globalTimeout = getIntOrElse(config, "globalTimeout", 0);
 		int maxRequestWait = getIntOrElse(config, "maxRequestWait", 10000);
 		int connectPerServer = getIntOrElse(config, "connectPerServer", 1);

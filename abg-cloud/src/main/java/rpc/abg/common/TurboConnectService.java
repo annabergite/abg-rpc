@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 
 /**
  * 基本的内置服务，建立连接后需要调用
@@ -12,7 +12,7 @@ import rpc.abg.annotation.abgService;
  * @author Annabergite
  *
  */
-@abgService(version = "1.0.0", rest = "/abg-service")
+@AbgService(version = "1.0.0", rest = "/abg-service")
 public interface abgConnectService {
 
 	public static final int SERVICE_HEARTBEAT = 0;
@@ -36,7 +36,7 @@ public interface abgConnectService {
 	 * 
 	 * @return
 	 */
-	@abgService(version = "1.0.0", rest = "/heartbeat")
+	@AbgService(version = "1.0.0", rest = "/heartbeat")
 	default CompletableFuture<Boolean> heartbeat() {
 		return CompletableFuture.completedFuture(Boolean.FALSE);
 	}
@@ -46,7 +46,7 @@ public interface abgConnectService {
 	 * 
 	 * @return
 	 */
-	@abgService(version = "1.0.0", rest = "/class/list")
+	@AbgService(version = "1.0.0", rest = "/class/list")
 	CompletableFuture<List<String>> getClassRegisterList();
 
 	/**
@@ -54,7 +54,7 @@ public interface abgConnectService {
 	 * 
 	 * @return
 	 */
-	@abgService(version = "1.0.0", rest = "/method/list")
+	@AbgService(version = "1.0.0", rest = "/method/list")
 	CompletableFuture<Map<String, Integer>> getMethodRegisterMap();
 
 	/**
@@ -62,7 +62,7 @@ public interface abgConnectService {
 	 * 
 	 * @return
 	 */
-	@abgService(version = "1.0.0", rest = "/rest/list")
+	@AbgService(version = "1.0.0", rest = "/rest/list")
 	CompletableFuture<List<String>> getRestRegisterList();
 
 	/**
@@ -70,7 +70,7 @@ public interface abgConnectService {
 	 * 
 	 * @return
 	 */
-	@abgService(version = "1.0.0", rest = "/class-id/list")
+	@AbgService(version = "1.0.0", rest = "/class-id/list")
 	CompletableFuture<Map<String, Integer>> getClassIdMap();
 
 }

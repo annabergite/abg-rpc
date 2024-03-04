@@ -23,7 +23,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 
 import rpc.abg.annotation.abgFailover;
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.client.abgClient;
 import rpc.abg.config.client.ClientConfig;
 import rpc.abg.util.ReflectUtils;
@@ -60,10 +60,10 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 			throw e;
 		}
 
-		Collection<Class<?>> abgClassList = extractabgServiceClassList(beanFactory);
+		Collection<Class<?>> abgClassList = extractAbgServiceClassList(beanFactory);
 
 		for (Class<?> abgClass : abgClassList) {
-			registerabgService(abgClass);
+			registerAbgService(abgClass);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 			return bean;
 		}
 
-		tryInjectabgServiceField(bean);
+		tryInjectAbgServiceField(bean);
 		return bean;
 	}
 
@@ -120,7 +120,7 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 
 	// 具体实现，下面的不用关注
 
-	private void registerabgService(Class<?> abgClass) {
+	private void registerAbgService(Class<?> abgClass) {
 		if (abgClient.getService(abgClass) != null) {
 			return;
 		}
@@ -175,9 +175,9 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 		}
 	}
 
-	private Collection<Class<?>> extractabgServiceClassList(ConfigurableListableBeanFactory beanFactory) {
+	private Collection<Class<?>> extractAbgServiceClassList(ConfigurableListableBeanFactory beanFactory) {
 		LocalDateTime startTime = LocalDateTime.now();
-		Set<Class<?>> abgServiceSet = new HashSet<>();
+		Set<Class<?>> AbgServiceSet = new HashSet<>();
 		String[] beanNames = beanFactory.getBeanDefinitionNames();
 
 		for (int i = 0; i < beanNames.length; i++) {
@@ -185,26 +185,26 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 			BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
 			String beanClassName = beanDefinition.getBeanClassName();
 
-			extractabgServiceClass(abgServiceSet, beanClassName);
+			extractAbgServiceClass(AbgServiceSet, beanClassName);
 		}
 
 		if (logger.isInfoEnabled()) {
 			LocalDateTime finishTime = LocalDateTime.now();
 			Duration duration = Duration.between(startTime, finishTime);
 
-			String abgServiceString = abgServiceSet//
+			String AbgServiceString = AbgServiceSet//
 					.stream()//
 					.map(clazz -> clazz.getName())//
 					.collect(Collectors.joining(",", "[", "]"));
 
-			logger.info("扫描到abgService: " + abgServiceString);
-			logger.info("扫描abgService耗时: " + duration);
+			logger.info("扫描到AbgService: " + AbgServiceString);
+			logger.info("扫描AbgService耗时: " + duration);
 		}
 
-		return abgServiceSet;
+		return AbgServiceSet;
 	}
 
-	private void extractabgServiceClass(Set<Class<?>> abgServiceSet, String beanClassName) {
+	private void extractAbgServiceClass(Set<Class<?>> AbgServiceSet, String beanClassName) {
 		if (beanClassName == null || beanClassName.startsWith("org.springframework.")) {
 			return;
 		}
@@ -221,19 +221,19 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 				return false;
 			}
 
-			abgService abgService = clazz.getAnnotation(abgService.class);
+			AbgService AbgService = clazz.getAnnotation(AbgService.class);
 
-			if (abgService == null) {
+			if (AbgService == null) {
 				return false;
 			}
 
 			return true;
 		});
 
-		abgServiceSet.addAll(allDependClass);
+		AbgServiceSet.addAll(allDependClass);
 	}
 
-	private void tryInjectabgServiceField(Object bean) {
+	private void tryInjectAbgServiceField(Object bean) {
 		if (bean == null) {
 			return;
 		}
@@ -241,12 +241,12 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 		Class<?> beanClass = bean.getClass();
 
 		while (beanClass != Object.class) {
-			tryInjectabgServiceField(beanClass, bean);
+			tryInjectAbgServiceField(beanClass, bean);
 			beanClass = beanClass.getSuperclass();
 		}
 	}
 
-	private void tryInjectabgServiceField(Class<?> beanClass, Object bean) {
+	private void tryInjectAbgServiceField(Class<?> beanClass, Object bean) {
 		Field[] fields = beanClass.getDeclaredFields();
 		for (int j = 0; j < fields.length; j++) {
 			Field field = fields[j];
@@ -256,9 +256,9 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 				continue;
 			}
 
-			abgService abgService = fieldClass.getAnnotation(abgService.class);
+			AbgService AbgService = fieldClass.getAnnotation(AbgService.class);
 
-			if (abgService == null) {
+			if (AbgService == null) {
 				continue;
 			}
 
@@ -275,7 +275,7 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 				field.set(bean, serviceBean);
 			} catch (Throwable t) {
 				if (logger.isErrorEnabled()) {
-					logger.error("手动注入abgService失败，" + field, t);
+					logger.error("手动注入AbgService失败，" + field, t);
 				}
 
 				continue;

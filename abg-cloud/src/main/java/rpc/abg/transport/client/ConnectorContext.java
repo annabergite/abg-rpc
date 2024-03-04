@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import io.netty.channel.EventLoopGroup;
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.common.RemoteContext;
 import rpc.abg.common.abgConnectService;
 import rpc.abg.config.HostPort;
@@ -110,7 +110,7 @@ final class ConnectorContext implements Weightable, Closeable {
 		}
 
 		int serviceId = abgConnectService.SERVICE_CLASS_ID_REGISTER;
-		long timeout = abgService.DEFAULT_TIME_OUT;
+		long timeout = AbgService.DEFAULT_TIME_OUT;
 
 		CompletableFuture<Map<String, Integer>> future = execute(serviceId, timeout);
 		Map<String, Integer> classIds = future.get();
@@ -149,7 +149,7 @@ final class ConnectorContext implements Weightable, Closeable {
 
 						boolean allowSend = doRequestFilter(request, heartbeatMethod, heartbeatServiceMethodName);
 						if (allowSend) {
-							long expireTime = SystemClock.fast().mills() + abgService.DEFAULT_TIME_OUT;
+							long expireTime = SystemClock.fast().mills() + AbgService.DEFAULT_TIME_OUT;
 							connector.send(index, new RequestWithFuture(request, future, expireTime));
 						} else {
 							future.completeExceptionally(

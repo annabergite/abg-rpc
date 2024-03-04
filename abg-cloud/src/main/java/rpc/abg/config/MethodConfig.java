@@ -2,7 +2,7 @@ package rpc.abg.config;
 
 import java.lang.reflect.Method;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.invoke.InvokerUtils;
 
 /**
@@ -45,11 +45,11 @@ public class MethodConfig {
 	}
 
 	private String version(Method method) {
-		String version = abgService.DEFAULT_VERSION;
+		String version = AbgService.DEFAULT_VERSION;
 
-		abgService config = method.getDeclaringClass().getAnnotation(abgService.class);
+		AbgService config = method.getDeclaringClass().getAnnotation(AbgService.class);
 		if (config == null) {
-			config = method.getAnnotation(abgService.class);
+			config = method.getAnnotation(AbgService.class);
 		}
 
 		if (config != null) {
@@ -65,11 +65,11 @@ public class MethodConfig {
 	}
 
 	private long timeout(Method method) {
-		long timeout = abgService.DEFAULT_TIME_OUT;
+		long timeout = AbgService.DEFAULT_TIME_OUT;
 
-		abgService config = method.getDeclaringClass().getAnnotation(abgService.class);
+		AbgService config = method.getDeclaringClass().getAnnotation(AbgService.class);
 		if (config == null) {
-			config = method.getAnnotation(abgService.class);
+			config = method.getAnnotation(AbgService.class);
 		}
 
 		if (config != null) {
@@ -77,23 +77,23 @@ public class MethodConfig {
 		}
 
 		if (timeout < 1) {
-			timeout = abgService.DEFAULT_TIME_OUT;
+			timeout = AbgService.DEFAULT_TIME_OUT;
 		}
 
 		return timeout;
 	}
 
 	private boolean ignore(Method method) {
-		boolean ignore = abgService.DEFAULT_IGNORE;
+		boolean ignore = AbgService.DEFAULT_IGNORE;
 
-		abgService config = method.getDeclaringClass().getAnnotation(abgService.class);
+		AbgService config = method.getDeclaringClass().getAnnotation(AbgService.class);
 
 		if (config != null) {
 			ignore = config.ignore();
 		}
 
 		if (!ignore) {
-			config = method.getAnnotation(abgService.class);
+			config = method.getAnnotation(AbgService.class);
 
 			if (config != null) {
 				ignore = config.ignore();

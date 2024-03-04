@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import com.google.common.base.Strings;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 
 public interface InvokerUtils {
 
@@ -23,11 +23,11 @@ public interface InvokerUtils {
 	 */
 	public static String getServiceClassName(String group, String app, Class<?> clazz) {
 		if (group == null || group.trim().length() == 0) {
-			group = abgService.DEFAULT_GROUP;
+			group = AbgService.DEFAULT_GROUP;
 		}
 
 		if (app == null || app.trim().length() == 0) {
-			app = abgService.DEFAULT_GROUP;
+			app = AbgService.DEFAULT_GROUP;
 		}
 
 		check(group, app);
@@ -51,20 +51,20 @@ public interface InvokerUtils {
 	public static String getServiceMethodName(String group, String app, Method method) {
 
 		if (group == null || group.trim().length() == 0) {
-			group = abgService.DEFAULT_GROUP;
+			group = AbgService.DEFAULT_GROUP;
 		}
 
 		if (app == null || app.trim().length() == 0) {
-			app = abgService.DEFAULT_GROUP;
+			app = AbgService.DEFAULT_GROUP;
 		}
 
 		check(group, app);
 
-		String version = abgService.DEFAULT_VERSION;
+		String version = AbgService.DEFAULT_VERSION;
 
-		abgService config = method.getAnnotation(abgService.class);
+		AbgService config = method.getAnnotation(AbgService.class);
 		if (config == null) {
-			config = method.getDeclaringClass().getAnnotation(abgService.class);
+			config = method.getDeclaringClass().getAnnotation(AbgService.class);
 		}
 
 		if (config != null) {
@@ -118,7 +118,7 @@ public interface InvokerUtils {
 	 */
 	public static String getRestPath(Method method) {
 
-		abgService methodConfig = method.getAnnotation(abgService.class);
+		AbgService methodConfig = method.getAnnotation(AbgService.class);
 
 		if (methodConfig == null) {
 			return null;
@@ -145,7 +145,7 @@ public interface InvokerUtils {
 			restPath = restPath.substring(0, restPath.length() - 1);
 		}
 
-		abgService classConfig = method.getDeclaringClass().getAnnotation(abgService.class);
+		AbgService classConfig = method.getDeclaringClass().getAnnotation(AbgService.class);
 		if (classConfig != null) {
 			String classRestPath = classConfig.rest();
 

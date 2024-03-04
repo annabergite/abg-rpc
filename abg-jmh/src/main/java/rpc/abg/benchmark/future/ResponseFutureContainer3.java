@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.protocol.Response;
 import rpc.abg.transport.client.exception.ConnectionException;
 import rpc.abg.util.SystemClock;
@@ -32,7 +32,7 @@ public final class ResponseFutureContainer3 implements Closeable {
 	}
 
 	public void addFuture(int requestId, CompletableFuture<Response> future) {
-		addFuture(requestId, future, abgService.DEFAULT_TIME_OUT);
+		addFuture(requestId, future, AbgService.DEFAULT_TIME_OUT);
 	}
 
 	private ConcurrentHashMap<Integer, FutureWithExpire<Response>> futureMap(int requestId) {
@@ -89,7 +89,7 @@ public final class ResponseFutureContainer3 implements Closeable {
 	@Override
 	public void close() throws IOException {
 		// 尝试平滑退出
-		for (int i = 0; i < abgService.DEFAULT_TIME_OUT; i += 100) {
+		for (int i = 0; i < AbgService.DEFAULT_TIME_OUT; i += 100) {
 			doExpireJob();
 
 			try {

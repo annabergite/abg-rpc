@@ -6,7 +6,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.jctools.maps.NonBlockingHashMapLong;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.protocol.Response;
 import rpc.abg.transport.client.exception.ConnectionException;
 import rpc.abg.transport.client.exception.ResponseTimeoutException;
@@ -24,7 +24,7 @@ public final class ResponseFutureContainer1 implements Closeable {
 			new NonBlockingHashMapLong<>(32);
 
 	public void addFuture(int requestId, CompletableFuture<Response> future) {
-		addFuture(requestId, future, abgService.DEFAULT_TIME_OUT);
+		addFuture(requestId, future, AbgService.DEFAULT_TIME_OUT);
 	}
 
 	public void addFuture(int requestId, CompletableFuture<Response> future, long timeout) {
@@ -95,7 +95,7 @@ public final class ResponseFutureContainer1 implements Closeable {
 	@Override
 	public void close() throws IOException {
 		// 尝试平滑退出
-		for (int i = 0; i < abgService.DEFAULT_TIME_OUT; i += 100) {
+		for (int i = 0; i < AbgService.DEFAULT_TIME_OUT; i += 100) {
 			doExpireJob();
 
 			if (futureMap.isEmpty()) {

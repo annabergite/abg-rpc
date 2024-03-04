@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.config.ConfigException;
 import rpc.abg.config.HostPort;
 import rpc.abg.serialization.JsonMapper;
@@ -110,8 +110,8 @@ public class ServerConfig {
 
 	private static ServerConfig parse(Config config) {
 
-		String group = getStringOrElse(config, "group", abgService.DEFAULT_GROUP);
-		String app = getStringOrElse(config, "app", abgService.DEFAULT_GROUP);
+		String group = getStringOrElse(config, "group", AbgService.DEFAULT_GROUP);
+		String app = getStringOrElse(config, "app", AbgService.DEFAULT_GROUP);
 		String ownerName = getStringOrElse(config, "owner.name", "");
 		String ownerPhone = getStringOrElse(config, "owner.phone", "");
 

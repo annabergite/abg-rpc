@@ -21,7 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import io.netty.channel.EventLoopGroup;
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.common.RemoteContext;
 import rpc.abg.common.abgConnectService;
 import rpc.abg.config.HostPort;
@@ -130,7 +130,7 @@ public class App implements Closeable {
 
 		Map<HostPort, Integer> providerWithWeight = Stream//
 				.of(serverAddresss)//
-				.collect(Collectors.toMap(t -> t, t -> Integer.valueOf(abgService.DEFAULT_WEIGHT)));
+				.collect(Collectors.toMap(t -> t, t -> Integer.valueOf(AbgService.DEFAULT_WEIGHT)));
 
 		setConnect(providerWithWeight);
 	}
@@ -687,7 +687,7 @@ public class App implements Closeable {
 	 */
 	private List<String> loadClass(ConnectorContext context) throws Exception {
 		int serviceId = abgConnectService.SERVICE_CLASS_REGISTER;
-		long timeout = abgService.DEFAULT_TIME_OUT;
+		long timeout = AbgService.DEFAULT_TIME_OUT;
 		CompletableFuture<List<String>> future = context.execute(serviceId, timeout);
 
 		return future.get();
@@ -700,7 +700,7 @@ public class App implements Closeable {
 	 */
 	private Map<String, Integer> loadServiceId(ConnectorContext context) throws Exception {
 		int serviceId = abgConnectService.SERVICE_METHOD_REGISTER;
-		long timeout = abgService.DEFAULT_TIME_OUT;
+		long timeout = AbgService.DEFAULT_TIME_OUT;
 		CompletableFuture<Map<String, Integer>> future = context.execute(serviceId, timeout);
 
 		return future.get();

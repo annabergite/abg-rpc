@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD })
-public @interface abgService {
+public @interface AbgService {
 
 	public static final int DEFAULT_WEIGHT = 100;
 	public static final String DEFAULT_GROUP = "DEFAULT_GROUP";

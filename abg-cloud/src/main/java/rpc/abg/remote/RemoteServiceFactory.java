@@ -22,7 +22,7 @@ import javassist.CtConstructor;
 import javassist.CtField;
 import javassist.CtMethod;
 import javassist.CtNewMethod;
-import rpc.abg.annotation.abgService;
+import rpc.abg.annotation.AbgService;
 import rpc.abg.config.MethodConfig;
 import rpc.abg.invoke.FailoverInvokerFactory;
 import rpc.abg.invoke.Invoker;
@@ -149,7 +149,7 @@ public class RemoteServiceFactory implements Closeable {
 			return;
 		}
 
-		abgService classConfig = clazz.getAnnotation(abgService.class);
+		AbgService classConfig = clazz.getAnnotation(AbgService.class);
 		if (classConfig != null && classConfig.ignore()) {
 			if (logger.isInfoEnabled()) {
 				logger.info(clazz + " service ignore");
