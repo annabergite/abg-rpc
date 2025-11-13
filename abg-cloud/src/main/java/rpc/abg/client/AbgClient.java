@@ -28,8 +28,8 @@ import rpc.abg.transport.client.App;
  * @author Annabergite
  *
  */
-public final class abgClient implements Closeable {
-	private static final Log logger = LogFactory.getLog(abgClient.class);
+public final class AbgClient implements Closeable {
+	private static final Log logger = LogFactory.getLog(AbgClient.class);
 
 	private final FailoverInvokerFactory failoverInvokerFactory = new FailoverInvokerFactory();
 	private final RemoteServiceFactory remoteServiceFactory = new RemoteServiceFactory(failoverInvokerFactory);
@@ -37,15 +37,15 @@ public final class abgClient implements Closeable {
 	private final EventLoopGroup eventLoopGroup;
 	private final CopyOnWriteArrayList<RpcClientFilter> filters = new CopyOnWriteArrayList<>();
 
-	public abgClient() {
+	public AbgClient() {
 		this(new ClientConfig());
 	}
 
-	public abgClient(String resourceName) {
+	public AbgClient(String resourceName) {
 		this(ClientConfig.parse(resourceName));
 	}
 
-	public abgClient(ClientConfig clientConfig) {
+	public AbgClient(ClientConfig clientConfig) {
 		eventLoopGroup = EventLoopGroupHolder.get();
 
 		if (clientConfig != null && clientConfig.getAppConfigList() != null) {

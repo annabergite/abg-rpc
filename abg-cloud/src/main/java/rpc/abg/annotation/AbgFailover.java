@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RUNTIME)
 @Target({ TYPE })
-public @interface abgFailover {
+public @interface AbgFailover {
 	/**
 	 * 服务接口
 	 * 

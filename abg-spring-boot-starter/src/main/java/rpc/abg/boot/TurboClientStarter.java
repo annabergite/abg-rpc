@@ -22,7 +22,6 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 
-import rpc.abg.annotation.abgFailover;
 import rpc.abg.annotation.AbgService;
 import rpc.abg.client.abgClient;
 import rpc.abg.config.client.ClientConfig;
@@ -45,7 +44,7 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 
 		try {
 			ClientConfig clientConfig = ClientConfig.parse("abg-client.conf");
-			abgClient = new abgClient(clientConfig);
+			abgClient = new AbgClient(clientConfig);
 		} catch (com.typesafe.config.ConfigException configException) {
 			if (logger.isErrorEnabled()) {
 				logger.error("abg-client.conf 格式错误，无法开启abgClient!", configException);
@@ -88,7 +87,7 @@ public class abgClientStarter implements BeanFactoryPostProcessor, BeanPostProce
 		}
 
 		Class<?> clazz = bean.getClass();
-		abgFailover abgFailover = clazz.getAnnotation(abgFailover.class);
+		AbgFailover abgFailover = clazz.getAnnotation(abgFailover.class);
 
 		if (abgFailover == null) {
 			return bean;

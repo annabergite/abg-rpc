@@ -19,7 +19,6 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
-import rpc.abg.annotation.abgFailover;
 import rpc.abg.annotation.AbgService;
 import rpc.abg.config.server.ServerConfig;
 import rpc.abg.invoke.ServerInvokerFactory;
@@ -160,7 +159,7 @@ public class abgServerStarter {
 
 		Class<?> beanClass = bean.getClass();
 
-		if (beanClass.getAnnotation(abgFailover.class) != null) {
+		if (beanClass.getAnnotation(AbgFailover.class) != null) {
 			return null;
 		}
 
